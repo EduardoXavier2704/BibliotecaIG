@@ -7,7 +7,6 @@ from livro import Livro
 from datetime import datetime
 from usuario import Usuario
 
-# Conectar ao banco de dados
 mydb = connect()
 
 customtkinter.set_appearance_mode("dark")
@@ -152,7 +151,6 @@ def listar_livros():
         mydb = connect()
         dados = query(mydb)
 
-        # Atribui a lista de dados à variável l3
         l3 = customtkinter.CTkLabel(master=l, text="\n".join(dados), font=('Century Gothic', 12))
         l3.place(relx=0.5, rely=0.6, anchor=tkinter.CENTER)
 
@@ -185,9 +183,9 @@ def emprestar_devolver_livros():
 
     def emprestar():
         titulo = e1.get()
-        autor = 'Autor'  # Replace 'Autor' with the actual author name
-        ano = 2000  # Replace 2000 with the actual year
-        livro = Livro(mydb, titulo, autor, ano)  # Create an instance of the Livro class
+        autor = 'Autor' 
+        ano = 2000 
+        livro = Livro(mydb, titulo, autor, ano)  
         if livro.verificar_disponibilidade():
             status_ = False
             return True
@@ -196,9 +194,9 @@ def emprestar_devolver_livros():
 
     def devolver():
         titulo = e2.get()
-        autor = 'Autor'  # Replace 'Autor' with the actual author name
-        ano = 2000  # Replace 2000 with the actual year
-        livro = Livro(mydb, titulo, autor, ano)  # Create an instance of the Livro class
+        autor = 'Autor'  
+        ano = 2000  
+        livro = Livro(mydb, titulo, autor, ano) 
         if not status_:
             status_ = True
             return True
@@ -300,9 +298,6 @@ button_cadastro.place(x=50, y=225)
 button_login = customtkinter.CTkButton(master=frame, fg_color="#993399", width=220, text="Login", command=check_login, corner_radius=6)
 button_login.place(x=50, y=275)
 
-
-
-
 app.mainloop()
 
 print("Bem-vindo à Biblioteca")
@@ -325,10 +320,10 @@ while True:
         nome = input('Digite o Nome: ')
         email = input('Digite o Email: ')
         senha = input('Digite a Senha: ')
+        
         data_nascimento = input('Digite a Data de Nascimento (DD/MM/YYYY): ')
-        # Converter a string de data para um objeto datetime
         data_nascimento_obj = datetime.strptime(data_nascimento, '%d/%m/%Y')
-        # Formatar a data no formato MySQL
+        
         data_nascimento_formatada = data_nascimento_obj.strftime('%Y-%m-%d')
         rua = input('Digite a Rua: ')
         bairro = input('Digite o Bairro: ')
@@ -397,5 +392,4 @@ while True:
     else:
         print("Opção inválida!")
 
-# Fechar a conexão com o banco de dados
 mydb.close()
